@@ -31,3 +31,7 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    errors:
+      messages:
+        invalid_image_extension: "must be a URL for GIF, JPG, JPEG or PNG image."
