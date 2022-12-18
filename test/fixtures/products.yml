@@ -6,7 +6,7 @@ one:
   image_url: lorem.jpg
   price: 9.99
 
-two:
+product_in_cart:
   title: MyString
   description: MyText
   image_url: lorem.jpg

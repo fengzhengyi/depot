@@ -19,7 +19,13 @@
               <p>
                 <%= sanitize(product.description) %>
               </p>
-              <div><%= number_to_currency(product.price) %></div>
+              <div>
+                <%= number_to_currency(product.price) %>
+                <%= button_to "Add to Cart",
+                              line_items_path(product_id: product),
+                              form_class: 'inline',
+                              class: "ml-4 bg-green-600 px-2 py-1 text-white rounded-lg" %>
+              </div>
             </div>
           </li>
         <% end %>
