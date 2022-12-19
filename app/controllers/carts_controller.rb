@@ -61,13 +61,13 @@ class CartsController < ApplicationController
     @cart.line_items.delete_all
 
     redirect_to cart_url, notice: "Your cart is currently empty."
-
   end
 
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_cart
+    raise ActiveRecord::RecordNotFound unless session[:cart_id].to_s == params[:id].to_s
     @cart = Cart.find(params[:id])
   end
 
