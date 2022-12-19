@@ -1,10 +1,18 @@
 <div id="<%= dom_id cart %>">
   <h2 class="font-bold text-lg mb-3">Your Pragmatic Cart</h2>
-  <ul class="list-none list-inside">
+  <ul class="list-none list-inside space-y-1">
     <% cart.line_items.each do |item| %>
-    <li><%= item.quantity %> &times; <%= item.product.title %></li>
+    <li class="flex justify-between space-x-4">
+      <span>
+        <%= item.quantity %> &times; <%= item.product.title %>
+      </span>
+      <span class="font-medium"><%= number_to_currency(item.total_price) %></span>
+    </li>
     <% end %>
   </ul>
+  <div class="font-medium text-right py-2">Total:
+  <span class="border-t-2 border-black py-2"><%= number_to_currency(cart.total_price) %></span>
+  </div>
   <% if action_name != "show" %>
     <%= link_to "Show this cart", cart, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to 'Edit this cart', edit_cart_path(cart), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>

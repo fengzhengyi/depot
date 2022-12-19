@@ -1,5 +1,5 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: %i[ show edit update destroy ]
+  before_action :set_cart, only: %i[ show edit update destroy empty]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # GET /carts or /carts.json
   def index
@@ -55,6 +55,13 @@ class CartsController < ApplicationController
       format.html { redirect_to carts_url, notice: "Cart was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def empty
+    @cart.line_items.delete_all
+
+    redirect_to cart_url, notice: "Your cart is currently empty."
+
   end
 
   private

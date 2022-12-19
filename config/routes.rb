@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :line_items
-  resources :carts
+  resources :carts do
+    patch 'empty', on: :member
+  end
   root 'store#index', as: 'store_index'
   resources :products
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
