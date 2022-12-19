@@ -1,17 +1,10 @@
-<div id="<%= dom_id line_item %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Product:</strong>
-    <%= line_item.product_id %>
-  </p>
+<% if @current_item == line_item %>
+  <li class="flex justify-between space-x-4 line-item-highlight">
+<% else %>
+  <li class="flex justify-between space-x-4">
+<% end %>
+<span class="grow"><%= line_item.quantity %> &times; <%= line_item.product.title %></span>
+<span class="font-medium"><%= number_to_currency(line_item.total_price) %></span>
+<%= button_to "-", line_item_path(line_item), method: :delete, class: 'text-red-600 ', form_class: 'inline-block' %>
+</li>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Cart:</strong>
-    <%= line_item.cart_id %>
-  </p>
-
-  <% if action_name != "show" %>
-    <%= link_to "Show this line item", line_item, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this line item', edit_line_item_path(line_item), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
-</div>

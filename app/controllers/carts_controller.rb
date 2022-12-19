@@ -60,7 +60,16 @@ class CartsController < ApplicationController
   def empty
     @cart.line_items.delete_all
 
-    redirect_to cart_url, notice: "Your cart is currently empty."
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+          :cart,
+          partial: 'layouts/cart',
+          locals: { cart: @cart }
+        )
+      end
+    end
+    # redirect_to cart_url, notice: "Your cart is currently empty."
   end
 
   private

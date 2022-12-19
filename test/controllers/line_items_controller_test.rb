@@ -17,25 +17,34 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create line_item has unique product" do
     assert_difference("LineItem.count") do
-      post line_items_url, params: { product_id: products(:ruby).id}
+      post line_items_url, params: { product_id: products(:ruby).id }
     end
 
     follow_redirect!
 
-    assert_select 'h2','Your Pragmatic Cart'
-    assert_select 'li span',"1 \u00D7 Programming Ruby 1.9"
+    assert_select 'h2', 'Your Pragmatic Cart'
+    assert_select 'li span', "1 \u00D7 Programming Ruby 1.9"
   end
 
   test "should create line_item has duplicate products" do
     assert_difference("LineItem.count") do
-      post line_items_url, params: { product_id: products(:product_in_cart).id}
-      post line_items_url, params: { product_id: products(:product_in_cart).id}
+      post line_items_url, params: { product_id: products(:product_in_cart).id }
+      post line_items_url, params: { product_id: products(:product_in_cart).id }
     end
 
     follow_redirect!
 
-    assert_select 'h2','Your Pragmatic Cart'
-    assert_select 'li span',"2 \u00D7 MyLike"
+    assert_select 'h2', 'Your Pragmatic Cart'
+    assert_select 'li span', "2 \u00D7 MyLike"
+  end
+
+  test "should create line item via turbo-stream" do
+    assert_difference "LineItem.count" do
+      post line_items_url, params: { product_id: products(:ruby).id },
+           as: :turbo_stream
+    end
+    assert_response :success
+    assert_match /<li class="flex justify-between space-x-4 line-item-highlight">/, @response.body
   end
 
   test "should show line_item" do

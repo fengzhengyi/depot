@@ -1,20 +1,11 @@
 <div id="<%= dom_id cart %>">
   <h2 class="font-bold text-lg mb-3">Your Pragmatic Cart</h2>
   <ul class="list-none list-inside space-y-1">
-    <% cart.line_items.each do |item| %>
-      <li class="flex justify-between space-x-4">
-        <span class="grow"><%= item.quantity %> &times; <%= item.product.title %></span>
-        <span class="font-medium"><%= number_to_currency(item.total_price) %></span>
-        <%= button_to "x", line_item_path(item), method: :delete, class: 'text-red-600 ', form_class: 'inline-block' %>
-      </li>
-    <% end %>
+    <%= render cart.line_items %>
   </ul>
+
   <div class="font-medium text-right py-2 mr-6">Total:
     <span class="border-t-2 border-black py-2"><%= number_to_currency(cart.total_price) %></span>
   </div>
-  <% if action_name != "show" %>
-    <%= link_to "Show this cart", cart, class: "rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to 'Edit this cart', edit_cart_path(cart), class: "rounded-lg py-3 ml-2 px-5 bg-gray-100 inline-block font-medium" %>
-    <hr class="mt-6">
-  <% end %>
+  <%= button_to 'Empty Cart', empty_cart_path(cart), method: :patch, class: "mt-2 rounded-lg py-1 px-2 bg-green-600 font-medium text-white" %>
 </div>
