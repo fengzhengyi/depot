@@ -10,7 +10,7 @@ class CartsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Carts"
   end
 
-  test "should create cart" do
+  test "should cart cart" do
     visit carts_url
     click_on "New cart"
 

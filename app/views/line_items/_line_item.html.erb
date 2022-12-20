@@ -1,10 +1,16 @@
 <% if @current_item == line_item %>
-  <li class="flex justify-between space-x-4 line-item-highlight">
+  <li class="line-item-highlight">
 <% else %>
-  <li class="flex justify-between space-x-4">
+  <li>
 <% end %>
-<span class="grow"><%= line_item.quantity %> &times; <%= line_item.product.title %></span>
-<span class="font-medium"><%= number_to_currency(line_item.total_price) %></span>
-<%= button_to "-", line_item_path(line_item), method: :delete, class: 'text-red-600 ', form_class: 'inline-block' %>
+<div><%= line_item.product.title %></div>
+<div class="flex justify-between items-center py-1">
+  <div class=" border border-gray-400 rounded-xl">
+    <%= button_to "-", decrement_line_item_path(line_item), method: :patch, class: 'border-r border-gray-400 px-2', form_class: 'inline-block' %>
+    <span class="px-2"><%= line_item.quantity %></span>
+    <%= button_to "+", line_items_path(product_id: line_item.product.id), class: 'border-l border-gray-400 px-2', form_class: 'inline-block' %>
+  </div>
+  <span class="font-medium"><%= number_to_currency(line_item.total_price) %></span>
+</div>
 </li>
 

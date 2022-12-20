@@ -1,7 +1,7 @@
 class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: %i[ create ]
-  before_action :set_line_item, only: %i[ show edit update destroy ]
+  before_action :set_line_item, only: %i[ show edit update destroy decrement]
 
   # GET /line_items or /line_items.json
   def index
@@ -28,7 +28,10 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.turbo_stream { @current_item = @line_item }
+        @current_item = @line_item
+        format.turbo_stream do
+          render template: 'carts/cart', locals: { cart: @cart }
+        end
         format.html { redirect_to store_index_url }
         format.json { render :show, status: :created, location: @line_item }
       else
@@ -53,20 +56,31 @@ class LineItemsController < ApplicationController
 
   # DELETE /line_items/1 or /line_items/1.json
   def destroy
-    cart = @line_item.cart
     @line_item.destroy
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          :cart,
-          partial: 'layouts/cart',
-          locals: { cart: cart }
-        )
+        render template: 'carts/cart', locals: { cart: @line_item.cart }
       end
       format.html { redirect_to cart_url(cart), notice: "Line item was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def decrement
+    if @line_item.quantity > 1
+      @line_item.quantity -= 1
+      @line_item.save
+      respond_to do |format|
+        format.turbo_stream do
+          @current_item = @line_item
+          render template: 'carts/cart', locals: { cart: @line_item.cart }
+        end
+      end
+    else
+      destroy
+    end
+
   end
 
   private
@@ -80,4 +94,5 @@ class LineItemsController < ApplicationController
   def line_item_params
     params.require(:line_item).permit(:product_id)
   end
+
 end

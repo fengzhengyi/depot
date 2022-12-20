@@ -1,21 +1,30 @@
 <%= turbo_frame_tag(dom_id(product)) do %>
-  <li class="flex mb-6">
-    <%= image_tag(product.image_url,
-                  class: 'w-40 h-48 shadow mr-6') %>
-    <div class="space-y-3">
-      <h2 class="text-lg font-medium">
-        <%= product.title %>
-      </h2>
-      <p>
-        <%= sanitize(product.description) %>
-      </p>
-      <div>
-        <%= number_to_currency(product.price) %>
-        <%= button_to "Add to Cart",
-                      line_items_path(product_id: product),
-                      form_class: 'inline',
-                      class: "ml-4 bg-green-600 px-2 py-1 text-white rounded-lg" %>
-      </div>
+  <% if Time.now - product.updated_at < 5 %>
+    <li class="flex mb-6 line-item-highlight">
+  <% else %>
+    <li class="flex mb-6">
+  <% end %>
+  <%= link_to(line_items_path(product_id: product),
+              data: {
+                turbo_method: :post
+              }) do %>
+    <%= image_tag(product.image_url, class: 'w-40 h-48 shadow mr-6 object-contain  max-w-none') %>
+  <% end %>
+
+  <div class="space-y-3">
+    <h2 class="text-lg font-medium">
+      <%= product.title %>
+    </h2>
+    <p>
+      <%= sanitize(product.description) %>
+    </p>
+    <div>
+      <%= number_to_currency(product.price) %>
+      <%= button_to "Add to Cart",
+                    line_items_path(product_id: product),
+                    form_class: 'inline',
+                    class: "ml-4 bg-green-600 px-2 py-1 text-white rounded-lg" %>
     </div>
+  </div>
   </li>
 <% end %>

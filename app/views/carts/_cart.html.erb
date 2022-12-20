@@ -4,7 +4,7 @@
     <%= render cart.line_items %>
   </ul>
 
-  <div class="font-medium text-right py-2 mr-6">Total:
+  <div class="font-medium text-right py-2">Total:
     <span class="border-t-2 border-black py-2"><%= number_to_currency(cart.total_price) %></span>
   </div>
   <%= button_to 'Empty Cart', empty_cart_path(cart), method: :patch, class: "mt-2 rounded-lg py-1 px-2 bg-green-600 font-medium text-white" %>

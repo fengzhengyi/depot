@@ -15,7 +15,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should create line_item has unique product" do
+  test "should cart line_item has unique product" do
     assert_difference("LineItem.count") do
       post line_items_url, params: { product_id: products(:ruby).id }
     end
@@ -26,7 +26,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li span', "1 \u00D7 Programming Ruby 1.9"
   end
 
-  test "should create line_item has duplicate products" do
+  test "should cart line_item has duplicate products" do
     assert_difference("LineItem.count") do
       post line_items_url, params: { product_id: products(:product_in_cart).id }
       post line_items_url, params: { product_id: products(:product_in_cart).id }
@@ -38,7 +38,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     assert_select 'li span', "2 \u00D7 MyLike"
   end
 
-  test "should create line item via turbo-stream" do
+  test "should cart line item via turbo-stream" do
     assert_difference "LineItem.count" do
       post line_items_url, params: { product_id: products(:ruby).id },
            as: :turbo_stream

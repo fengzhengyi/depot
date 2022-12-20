@@ -10,7 +10,7 @@ class LineItemsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Line items"
   end
 
-  test "should create line item" do
+  test "should cart line item" do
     visit line_items_url
     click_on "New line item"
 

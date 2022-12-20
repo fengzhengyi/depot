@@ -20,7 +20,7 @@ class CartsController < ApplicationController
   end
 
   # POST /carts or /carts.json
-  def create
+  def cart
     @cart = Cart.new(cart_params)
 
     respond_to do |format|
@@ -62,11 +62,7 @@ class CartsController < ApplicationController
 
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
-          :cart,
-          partial: 'layouts/cart',
-          locals: { cart: @cart }
-        )
+        render template: 'carts/cart', locals: { cart: @cart, notice: "Your cart is currently empty." }
       end
     end
     # redirect_to cart_url, notice: "Your cart is currently empty."

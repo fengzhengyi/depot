@@ -1,7 +1,7 @@
 #---
 # Excerpted from "Agile Web Development with Rails 7",
 # published by The Pragmatic Bookshelf.
-# Copyrights apply to this code. It may not be used to create training material,
+# Copyrights apply to this code. It may not be used to cart training material,
 # courses, books, articles, and the like. Contact us if you are in doubt.
 # We make no guarantees that this code is fit for any purpose.
 # Visit https://pragprog.com/titles/rails7 for more book information.
@@ -47,7 +47,7 @@ Product.create!(title: 'Modern CSS with Tailwind',
                   %{<p>
       <em>Flexible Styling Without the Fuss</em>
       Tailwind CSS is an exciting new CSS framework that allows you to
-      design your site by composing simple utility classes to create complex
+      design your site by composing simple utility classes to cart complex
       effects. With Tailwind, you can style your text, move your items on
       the page, design complex page layouts, and adapt your design for
       devices from a phone to a wide-screen monitor. With this book, you’ll
