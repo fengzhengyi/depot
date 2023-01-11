@@ -20,7 +20,7 @@ class CartsController < ApplicationController
   end
 
   # POST /carts or /carts.json
-  def cart
+  def create
     @cart = Cart.new(cart_params)
 
     respond_to do |format|
@@ -61,11 +61,12 @@ class CartsController < ApplicationController
     @cart.line_items.delete_all
 
     respond_to do |format|
-      format.turbo_stream do
-        render template: 'carts/cart', locals: { cart: @cart, notice: "Your cart is currently empty." }
-      end
+      format.html { redirect_to store_index_url, notice: "Your cart is currently empty." }
+      # format.turbo_stream do
+      #   render template: 'carts/cart', locals: { cart: @cart, notice: "Your cart is currently empty." }
+      # end
     end
-    # redirect_to cart_url, notice: "Your cart is currently empty."
+
   end
 
   private

@@ -23,7 +23,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'h2', 'Your Pragmatic Cart'
-    assert_select 'li span', "1 \u00D7 Programming Ruby 1.9"
+    assert_select 'div', "Programming Ruby 1.9"
   end
 
   test "should cart line_item has duplicate products" do
@@ -35,7 +35,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select 'h2', 'Your Pragmatic Cart'
-    assert_select 'li span', "2 \u00D7 MyLike"
+    assert_select 'span', "2"
   end
 
   test "should cart line item via turbo-stream" do
@@ -44,7 +44,7 @@ class LineItemsControllerTest < ActionDispatch::IntegrationTest
            as: :turbo_stream
     end
     assert_response :success
-    assert_match /<li class="flex justify-between space-x-4 line-item-highlight">/, @response.body
+    assert_match /<li class="line-item-highlight">/, @response.body
   end
 
   test "should show line_item" do

@@ -3,7 +3,9 @@
 one:
   product: product_in_cart
   cart: one
+  price: 1
 
 two:
-  product: product_in_cart
-  cart: two
+  product: ruby
+  cart: one
+  price: 1

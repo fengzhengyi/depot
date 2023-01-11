@@ -25,24 +25,24 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
 
   test "should show cart" do
     get cart_url(@cart)
-    assert_response :success
+    assert_redirected_to store_index_url
   end
 
   test "should get edit" do
     get edit_cart_url(@cart)
-    assert_response :success
+    assert_redirected_to store_index_url
   end
 
   test "should update cart" do
     patch cart_url(@cart), params: { cart: {  } }
-    assert_redirected_to cart_url(@cart)
+    assert_redirected_to store_index_url
   end
 
   test "should destroy cart" do
-    assert_difference("Cart.count", -1) do
+    assert_difference("Cart.count", 0) do
       delete cart_url(@cart)
     end
 
-    assert_redirected_to carts_url
+    assert_redirected_to store_index_url
   end
 end

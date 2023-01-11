@@ -62,7 +62,7 @@ class LineItemsController < ApplicationController
       format.turbo_stream do
         render template: 'carts/cart', locals: { cart: @line_item.cart }
       end
-      format.html { redirect_to cart_url(cart), notice: "Line item was successfully destroyed." }
+      format.html { redirect_to cart_url(@line_item.cart), notice: "Line item was successfully destroyed." }
       format.json { head :no_content }
     end
   end
