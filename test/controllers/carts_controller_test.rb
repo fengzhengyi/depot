@@ -15,7 +15,7 @@ class CartsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should cart cart" do
+  test "should create cart" do
     assert_difference("Cart.count") do
       post carts_url, params: { cart: {  } }
     end

@@ -1,13 +1,13 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  title: MyString
+  title: Programming Ruby 1.0
   description: MyText
   image_url: lorem.jpg
   price: 9.99
 
 product_in_cart:
-  title: MyLike
+  title: Programming Ruby 2.9
   description: MyText
   image_url: lorem.jpg
   price: 9.99

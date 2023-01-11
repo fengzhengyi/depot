@@ -10,16 +10,12 @@ class LineItemsTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Line items"
   end
 
-  test "should cart line item" do
-    visit line_items_url
-    click_on "New line item"
+  test "should add line item to cart" do
+    visit store_index_url
+    click_on "Add to Cart", match: :first
 
-    fill_in "Cart", with: @line_item.cart_id
-    fill_in "Product", with: @line_item.product_id
-    click_on "Create Line item"
-
-    assert_text "Line item was successfully created"
-    click_on "Back"
+    assert_text "Your Pragmatic Cart"
+    assert_text "Programming Ruby 1.0"
   end
 
   test "should update Line item" do
@@ -31,13 +27,20 @@ class LineItemsTest < ApplicationSystemTestCase
     click_on "Update Line item"
 
     assert_text "Line item was successfully updated"
-    click_on "Back"
+    click_on "Back to line items"
   end
 
-  test "should destroy Line item" do
-    visit line_item_url(@line_item)
-    click_on "Destroy this line item", match: :first
+  test "should decrement Line item" do
+    visit store_index_url
+    click_on "Add to Cart", match: :first
+    click_on "Add to Cart", match: :first
 
-    assert_text "Line item was successfully destroyed"
+    click_on "-", match: :first
+    assert_text "Your Pragmatic Cart"
+    assert_text "1"
+
+    click_on "-", match: :first
+
+    assert_no_text "Your Pragmatic Cart"
   end
 end
