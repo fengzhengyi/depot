@@ -1,6 +1,8 @@
 require "application_system_test_case"
 
 class OrdersTest < ApplicationSystemTestCase
+  include ActiveJob::TestHelper
+
   setup do
     @order = orders(:one)
   end
@@ -82,5 +84,44 @@ class OrdersTest < ApplicationSystemTestCase
     assert has_no_field? 'Credit card number'
     assert has_no_field? 'Expiration date'
     assert has_field? 'Po number'
+  end
+
+  test "check order and delivery" do
+    LineItem.delete_all
+    Order.delete_all
+
+    visit store_index_url
+
+    click_on 'Add to Cart',match: :first
+
+    click_on 'Checkout'
+
+    fill_in 'Name',with: 'Dave HH'
+    fill_in 'Address', with:'西安海亮新英里'
+    fill_in 'Email', with: 'fzktc@163.com'
+    select 'Check', from: 'Pay type'
+    fill_in 'Routing number',with:'123456'
+    fill_in 'Account number', with:'987654'
+
+    click_on 'Place Order'
+    assert_text 'Thank you for your order'
+
+    perform_enqueued_jobs
+    perform_enqueued_jobs
+    assert_performed_jobs 2
+
+    orders = Order.all
+    assert_equal 1,orders.size
+
+    order = orders.first
+    assert_equal 'Dave HH', order.name
+    assert_equal '西安海亮新英里', order.address
+    assert_equal 'faktc@163.com',order.email
+    assert_equal 'Check', order.pay_type
+    assert_equal 1,order.line_items.size
+    mail = ActionMailer::Base.deliveries.last
+    assert_equal ["fzktc@163.com"], mail.to
+    assert_equal '512369179@qq.com', mail[:from].value
+    assert_equal "Pragmatic Store Order Confirmation", mail.subject
   end
 end
