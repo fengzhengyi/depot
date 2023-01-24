@@ -10,7 +10,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "requires iitem in cart" do
+  test "requires item in cart" do
     get new_order_url
     assert_redirected_to store_index_path
     assert_equal 'Your cart is empty', flash[:notice]
@@ -27,7 +27,7 @@ class OrdersControllerTest < ActionDispatch::IntegrationTest
       post orders_url, params: { order: { address: @order.address, email: @order.email, name: @order.name, pay_type: @order.pay_type } }
     end
 
-    assert_redirected_to store_index_url
+    assert_redirected_to store_index_url(locale: 'en')
   end
 
   test "should show order" do

@@ -1,0 +1,108 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   "true": "foo"
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+cn:
+  hello: "你好，世界"
+  number:
+    currency:
+      format:
+        unit: "¥"
+        precision: 2
+        separator: "."
+        delimiter: ","
+        format: "%u&nbsp;%n"
+
+  errors:
+    template:
+      body: "以下字段存在问题："
+      header:
+        one: "1个错误导致无法保存此%{model}。"
+        other: "%{count}个错误导致无法保存此%{model}。"
+  activerecord:
+    models:
+      order: "订单"
+    attributes:
+      order:
+          address: "地址"
+          name: "姓名"
+          email: "邮件"
+          pay_type: "支付方式"
+    errors:
+      messages:
+        invalid_image_extension: "必须是一个 GIF、JPG、JPEG 或者 PNG 格式的图片链接"
+        inclusion: "没有包含在列表中"
+        blank: "不能为空"
+      models:
+        product:
+          invalid_price: "必须小于或等于 0.01"
+  layouts:
+    application:
+      title: "实用书架"
+      home: "主页"
+      questions: "问题"
+      news: "新闻"
+      contact: "联系"
+  store:
+    index:
+      title_html: "你的实用目录"
+    product:
+      add_html: "加入购物车"
+
+  orders:
+    new:
+      legend: "请输入详细信息"
+    form:
+      name: "姓名"
+      address_html: "地址"
+      email: "邮箱"
+      pay_type: "支付方式"
+      pay_prompt_html: "选择一种支付方式"
+      submit: "确认下单"
+      pay_types:
+        "Check": "支票"
+        "Credit card": "信用卡"
+        "Purchase order": "采购订单"
+    check:
+      routing_number: "路由号码"
+      account_number: "账户号码"
+    cc:
+      cc_number: "信用卡号"
+      expiration_date: "到期日"
+    po:
+      po_number: "订单编号"
+
+  carts:
+    cart:
+      title: "你的实用购物车"
+      empty: "清空购物车"
+      checkout: "下单"
+
+  thanks: "感谢你下单"

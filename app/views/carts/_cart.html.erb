@@ -1,5 +1,5 @@
 <div id="<%= dom_id cart %>">
-  <h2 class="font-bold text-lg mb-3">Your Pragmatic Cart</h2>
+  <h2 class="font-bold text-lg mb-3"><%= t('.title') %></h2>
   <ul class="list-none list-inside space-y-1">
     <%= render cart.line_items %>
   </ul>
@@ -8,8 +8,8 @@
     <span class="border-t-2 border-black py-2"><%= number_to_currency(cart.total_price) %></span>
   </div>
   <div class="flex space-x-2 mt-2">
-    <%= button_to 'Checkout', new_order_path, method: :get, class: "rounded-lg py-1 px-2 bg-green-600 font-medium text-white",
+    <%= button_to t('.checkout'), new_order_path(locale: I18n.locale), method: :get, class: "rounded-lg py-1 px-2 bg-green-600 font-medium text-white",
                   disabled: @checkingOut%>
-    <%= button_to 'Empty Cart', empty_cart_path(cart), method: :patch, class: "rounded-lg py-1 px-2 bg-green-200 text-black " %>
+    <%= button_to t('.empty'), empty_cart_path(cart), method: :patch, class: "rounded-lg py-1 px-2 bg-green-200 text-black " %>
   </div>
 </div>
