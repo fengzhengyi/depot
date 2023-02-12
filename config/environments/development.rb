@@ -48,7 +48,7 @@ Rails.application.configure do
     port: 25,
     domain: "qq.com",
     user_name: "512369179@qq.com",
-    password: "acfyadpekjtqbjee",
+    password: Rails.application.credentials.email_password_qq,
     authentication: "plain"
   }
 

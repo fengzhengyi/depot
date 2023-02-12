@@ -20,6 +20,19 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+#  database: depot
+#  adapter: postgresql
+#  encoding: unicode
+#  host: db
+#  username: fzy
+#  password: 123456
+#  pool: 5
 production:
-  <<: *default
-  database: db/production.sqlite3
+  database: depot
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  username: fzy_in_docker
+  password: 123456
+  pool: 5
+
